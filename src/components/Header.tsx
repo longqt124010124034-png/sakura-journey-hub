@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { LanguageToggle } from '@/components/ui/language-toggle'
-import { Menu, X, Sunrise } from 'lucide-react'
+import { Menu, X, Sunrise, Shield } from 'lucide-react'
 
 const Header = () => {
   const { t } = useTranslation()
@@ -75,6 +76,12 @@ const Header = () => {
 
           {/* Desktop Actions */}
           <div className="hidden lg:flex items-center space-x-4">
+            <Link to="/auth">
+              <Button variant="ghost" size="sm" className="text-xs">
+                <Shield className="h-3 w-3 mr-1" />
+                Admin
+              </Button>
+            </Link>
             <ThemeToggle />
             <LanguageToggle />
             <Button 
