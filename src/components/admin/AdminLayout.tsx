@@ -3,7 +3,7 @@ import { useNavigate, Outlet, NavLink } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
-import { Home, BookOpen, Users, DollarSign, HelpCircle, Info, LogOut } from 'lucide-react';
+import { Home, BookOpen, Users, DollarSign, HelpCircle, Info, LogOut, Inbox, LayoutPanelBottom } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const AdminLayout = () => {
@@ -60,11 +60,13 @@ const AdminLayout = () => {
 
   const menuItems = [
     { title: 'Tổng quan', url: '/admin', icon: Home },
+    { title: 'Đăng ký liên hệ', url: '/admin/submissions', icon: Inbox },
     { title: 'Giới thiệu', url: '/admin/about', icon: Info },
     { title: 'Khóa học', url: '/admin/courses', icon: BookOpen },
     { title: 'Đội ngũ', url: '/admin/team', icon: Users },
     { title: 'Học phí', url: '/admin/pricing', icon: DollarSign },
     { title: 'FAQ', url: '/admin/faq', icon: HelpCircle },
+    { title: 'Footer', url: '/admin/footer', icon: LayoutPanelBottom },
   ];
 
   return (
