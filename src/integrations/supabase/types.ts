@@ -185,6 +185,72 @@ export type Database = {
         }
         Relationships: []
       }
+      footer_settings: {
+        Row: {
+          address: string | null
+          center_name_en: string | null
+          center_name_jp: string | null
+          center_name_vn: string | null
+          copyright_text: string | null
+          created_at: string
+          description_en: string | null
+          description_jp: string | null
+          description_vn: string | null
+          email: string | null
+          facebook_url: string | null
+          id: string
+          instagram_url: string | null
+          phone: string | null
+          tiktok_url: string | null
+          updated_at: string
+          working_hours: string | null
+          youtube_url: string | null
+          zalo_url: string | null
+        }
+        Insert: {
+          address?: string | null
+          center_name_en?: string | null
+          center_name_jp?: string | null
+          center_name_vn?: string | null
+          copyright_text?: string | null
+          created_at?: string
+          description_en?: string | null
+          description_jp?: string | null
+          description_vn?: string | null
+          email?: string | null
+          facebook_url?: string | null
+          id?: string
+          instagram_url?: string | null
+          phone?: string | null
+          tiktok_url?: string | null
+          updated_at?: string
+          working_hours?: string | null
+          youtube_url?: string | null
+          zalo_url?: string | null
+        }
+        Update: {
+          address?: string | null
+          center_name_en?: string | null
+          center_name_jp?: string | null
+          center_name_vn?: string | null
+          copyright_text?: string | null
+          created_at?: string
+          description_en?: string | null
+          description_jp?: string | null
+          description_vn?: string | null
+          email?: string | null
+          facebook_url?: string | null
+          id?: string
+          instagram_url?: string | null
+          phone?: string | null
+          tiktok_url?: string | null
+          updated_at?: string
+          working_hours?: string | null
+          youtube_url?: string | null
+          zalo_url?: string | null
+        }
+        Relationships: []
+      }
       pricing_plans: {
         Row: {
           created_at: string | null
