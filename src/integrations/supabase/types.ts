@@ -41,6 +41,42 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_submissions: {
+        Row: {
+          course: string | null
+          created_at: string
+          email: string
+          id: string
+          message: string | null
+          name: string
+          phone: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          course?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          message?: string | null
+          name: string
+          phone: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          course?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       courses: {
         Row: {
           capacity: number
@@ -146,6 +182,72 @@ export type Database = {
           question_jp?: string | null
           question_vn?: string
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      footer_settings: {
+        Row: {
+          address: string | null
+          center_name_en: string | null
+          center_name_jp: string | null
+          center_name_vn: string | null
+          copyright_text: string | null
+          created_at: string
+          description_en: string | null
+          description_jp: string | null
+          description_vn: string | null
+          email: string | null
+          facebook_url: string | null
+          id: string
+          instagram_url: string | null
+          phone: string | null
+          tiktok_url: string | null
+          updated_at: string
+          working_hours: string | null
+          youtube_url: string | null
+          zalo_url: string | null
+        }
+        Insert: {
+          address?: string | null
+          center_name_en?: string | null
+          center_name_jp?: string | null
+          center_name_vn?: string | null
+          copyright_text?: string | null
+          created_at?: string
+          description_en?: string | null
+          description_jp?: string | null
+          description_vn?: string | null
+          email?: string | null
+          facebook_url?: string | null
+          id?: string
+          instagram_url?: string | null
+          phone?: string | null
+          tiktok_url?: string | null
+          updated_at?: string
+          working_hours?: string | null
+          youtube_url?: string | null
+          zalo_url?: string | null
+        }
+        Update: {
+          address?: string | null
+          center_name_en?: string | null
+          center_name_jp?: string | null
+          center_name_vn?: string | null
+          copyright_text?: string | null
+          created_at?: string
+          description_en?: string | null
+          description_jp?: string | null
+          description_vn?: string | null
+          email?: string | null
+          facebook_url?: string | null
+          id?: string
+          instagram_url?: string | null
+          phone?: string | null
+          tiktok_url?: string | null
+          updated_at?: string
+          working_hours?: string | null
+          youtube_url?: string | null
+          zalo_url?: string | null
         }
         Relationships: []
       }
