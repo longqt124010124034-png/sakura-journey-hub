@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { BookOpen, Users, DollarSign, HelpCircle } from 'lucide-react';
+import { BookOpen, Users, DollarSign, HelpCircle, Inbox } from 'lucide-react';
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
@@ -9,6 +9,8 @@ const Dashboard = () => {
     team: 0,
     pricing: 0,
     faq: 0,
+    submissions: 0,
+    newSubmissions: 0,
   });
 
   useEffect(() => {
@@ -16,11 +18,13 @@ const Dashboard = () => {
   }, []);
 
   const loadStats = async () => {
-    const [courses, team, pricing, faq] = await Promise.all([
+    const [courses, team, pricing, faq, subs, newSubs] = await Promise.all([
       supabase.from('courses').select('id', { count: 'exact', head: true }),
       supabase.from('team_members').select('id', { count: 'exact', head: true }),
       supabase.from('pricing_plans').select('id', { count: 'exact', head: true }),
       supabase.from('faqs').select('id', { count: 'exact', head: true }),
+      supabase.from('contact_submissions').select('id', { count: 'exact', head: true }),
+      supabase.from('contact_submissions').select('id', { count: 'exact', head: true }).eq('status', 'new'),
     ]);
 
     setStats({
@@ -28,10 +32,14 @@ const Dashboard = () => {
       team: team.count || 0,
       pricing: pricing.count || 0,
       faq: faq.count || 0,
+      submissions: subs.count || 0,
+      newSubmissions: newSubs.count || 0,
     });
   };
 
   const statCards = [
+    { title: 'Đăng ký mới', value: stats.newSubmissions, icon: Inbox, color: 'text-pink-500' },
+    { title: 'Tổng đăng ký', value: stats.submissions, icon: Inbox, color: 'text-orange-500' },
     { title: 'Khóa học', value: stats.courses, icon: BookOpen, color: 'text-blue-500' },
     { title: 'Giáo viên', value: stats.team, icon: Users, color: 'text-green-500' },
     { title: 'Gói học phí', value: stats.pricing, icon: DollarSign, color: 'text-yellow-500' },
