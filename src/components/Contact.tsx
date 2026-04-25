@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useToast } from '@/hooks/use-toast'
+import { supabase } from '@/integrations/supabase/client'
+import { z } from 'zod'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -14,6 +16,14 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Send, CheckCircle, Phone, Mail, MapPin } from 'lucide-react'
+
+const contactSchema = z.object({
+  name: z.string().trim().min(2, 'Họ tên tối thiểu 2 ký tự').max(100),
+  email: z.string().trim().email('Email không hợp lệ').max(255),
+  phone: z.string().trim().min(8, 'Số điện thoại không hợp lệ').max(20),
+  course: z.string().min(1, 'Vui lòng chọn khóa học'),
+  message: z.string().max(1000).optional(),
+})
 
 const Contact = () => {
   const { t } = useTranslation()
@@ -44,19 +54,35 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
 
-    // Simulate form submission
+    const parsed = contactSchema.safeParse(formData)
+    if (!parsed.success) {
+      toast({
+        title: '❌ Thông tin chưa hợp lệ',
+        description: parsed.error.errors[0]?.message ?? 'Vui lòng kiểm tra lại',
+        variant: 'destructive',
+      })
+      return
+    }
+
+    setIsSubmitting(true)
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
+      const { error } = await supabase.from('contact_submissions').insert({
+        name: parsed.data.name,
+        email: parsed.data.email,
+        phone: parsed.data.phone,
+        course: parsed.data.course,
+        message: parsed.data.message || null,
+        status: 'new',
+      })
+      if (error) throw error
+
       toast({
         title: "🎉 Đăng ký thành công!",
         description: t('contact.success'),
         duration: 5000,
       })
 
-      // Reset form
       setFormData({
         name: '',
         email: '',
