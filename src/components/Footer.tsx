@@ -10,6 +10,7 @@ type FooterData = {
   address?: string | null; phone?: string | null; email?: string | null; working_hours?: string | null;
   facebook_url?: string | null; youtube_url?: string | null; zalo_url?: string | null;
   instagram_url?: string | null; tiktok_url?: string | null; copyright_text?: string | null;
+  logo_url?: string | null;
 }
 
 const Footer = () => {
@@ -45,9 +46,13 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="p-2 rounded-full bg-gradient-to-br from-sakura to-sunrise shadow-glow">
-                <Sunrise className="h-8 w-8 text-white" />
-              </div>
+              {data.logo_url ? (
+                <img src={data.logo_url} alt="Logo" className="h-12 w-12 rounded-full object-cover shadow-glow" />
+              ) : (
+                <div className="p-2 rounded-full bg-gradient-to-br from-sakura to-sunrise shadow-glow">
+                  <Sunrise className="h-8 w-8 text-white" />
+                </div>
+              )}
               <div>
                 <h3 className="text-xl font-bold font-japanese">{name}</h3>
                 {data.center_name_jp && lang !== 'jp' && (

@@ -3,14 +3,32 @@ import { useNavigate, Outlet, NavLink } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
-import { Home, BookOpen, Users, DollarSign, HelpCircle, Info, LogOut, Inbox, PanelBottom } from 'lucide-react';
+import { Home, BookOpen, Users, DollarSign, HelpCircle, Info, LogOut, Inbox, PanelBottom, Palette } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+
+const ADMIN_THEMES = [
+  { id: 'sakura', name: 'Sakura', color: 'hsl(348 83% 47%)' },
+  { id: 'ocean', name: 'Ocean', color: 'hsl(210 90% 50%)' },
+  { id: 'forest', name: 'Forest', color: 'hsl(152 60% 38%)' },
+  { id: 'sunset', name: 'Sunset', color: 'hsl(18 90% 55%)' },
+  { id: 'violet', name: 'Violet', color: 'hsl(270 70% 55%)' },
+  { id: 'midnight', name: 'Midnight', color: 'hsl(230 80% 60%)' },
+] as const;
+type AdminThemeId = typeof ADMIN_THEMES[number]['id'];
 
 const AdminLayout = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [adminTheme, setAdminTheme] = useState<AdminThemeId>(
+    () => (localStorage.getItem('admin-theme') as AdminThemeId) || 'sakura'
+  );
+
+  useEffect(() => {
+    localStorage.setItem('admin-theme', adminTheme);
+  }, [adminTheme]);
 
   useEffect(() => {
     checkAuth();
@@ -71,7 +89,7 @@ const AdminLayout = () => {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full">
+      <div className="min-h-screen flex w-full" data-admin-theme={adminTheme}>
         <Sidebar className="border-r">
           <div className="p-4 border-b flex items-center justify-between">
             <h2 className="font-bold text-lg">CMS Admin</h2>
@@ -112,8 +130,42 @@ const AdminLayout = () => {
           </div>
         </Sidebar>
 
-        <main className="flex-1 p-6 overflow-auto">
-          <Outlet />
+        <main className="flex-1 overflow-auto">
+          <div className="sticky top-0 z-30 flex items-center justify-end gap-2 px-6 py-3 border-b bg-background/80 backdrop-blur">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="gap-2">
+                  <Palette className="h-4 w-4" />
+                  <span className="hidden sm:inline">Theme</span>
+                  <span
+                    className="h-3 w-3 rounded-full border"
+                    style={{ background: ADMIN_THEMES.find((t) => t.id === adminTheme)?.color }}
+                  />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuLabel>Chọn theme màu</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {ADMIN_THEMES.map((t) => (
+                  <DropdownMenuItem
+                    key={t.id}
+                    onClick={() => setAdminTheme(t.id)}
+                    className="flex items-center gap-3 cursor-pointer"
+                  >
+                    <span
+                      className="h-4 w-4 rounded-full border"
+                      style={{ background: t.color }}
+                    />
+                    <span className="flex-1">{t.name}</span>
+                    {adminTheme === t.id && <span className="text-xs text-primary">✓</span>}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+          <div className="p-6">
+            <Outlet />
+          </div>
         </main>
       </div>
     </SidebarProvider>
