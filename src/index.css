@@ -79,6 +79,63 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
+  /* ============ ADMIN COLOR THEMES ============ */
+  /* Apply on admin layout root via data-admin-theme attribute */
+  [data-admin-theme="sakura"] {
+    --primary: 348 83% 47%;
+    --primary-foreground: 0 0% 98%;
+    --ring: 348 83% 47%;
+    --accent: 348 83% 47%;
+    --sidebar-primary: 348 83% 47%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-ring: 348 83% 47%;
+  }
+  [data-admin-theme="ocean"] {
+    --primary: 210 90% 50%;
+    --primary-foreground: 0 0% 100%;
+    --ring: 210 90% 50%;
+    --accent: 195 85% 48%;
+    --sidebar-primary: 210 90% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-ring: 210 90% 50%;
+  }
+  [data-admin-theme="forest"] {
+    --primary: 152 60% 38%;
+    --primary-foreground: 0 0% 100%;
+    --ring: 152 60% 38%;
+    --accent: 142 55% 42%;
+    --sidebar-primary: 152 60% 38%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-ring: 152 60% 38%;
+  }
+  [data-admin-theme="sunset"] {
+    --primary: 18 90% 55%;
+    --primary-foreground: 0 0% 100%;
+    --ring: 18 90% 55%;
+    --accent: 35 95% 55%;
+    --sidebar-primary: 18 90% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-ring: 18 90% 55%;
+  }
+  [data-admin-theme="violet"] {
+    --primary: 270 70% 55%;
+    --primary-foreground: 0 0% 100%;
+    --ring: 270 70% 55%;
+    --accent: 290 70% 55%;
+    --sidebar-primary: 270 70% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-ring: 270 70% 55%;
+  }
+  [data-admin-theme="midnight"] {
+    --primary: 230 80% 60%;
+    --primary-foreground: 0 0% 100%;
+    --ring: 230 80% 60%;
+    --accent: 250 70% 60%;
+    --sidebar-primary: 230 80% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-ring: 230 80% 60%;
+  }
+
   .dark {
     /* Dark mode - Sophisticated Japanese night aesthetic */
     --background: 0 0% 8%;
