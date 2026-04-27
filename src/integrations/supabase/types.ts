@@ -198,8 +198,10 @@ export type Database = {
           description_vn: string | null
           email: string | null
           facebook_url: string | null
+          favicon_url: string | null
           id: string
           instagram_url: string | null
+          logo_url: string | null
           phone: string | null
           tiktok_url: string | null
           updated_at: string
@@ -219,8 +221,10 @@ export type Database = {
           description_vn?: string | null
           email?: string | null
           facebook_url?: string | null
+          favicon_url?: string | null
           id?: string
           instagram_url?: string | null
+          logo_url?: string | null
           phone?: string | null
           tiktok_url?: string | null
           updated_at?: string
@@ -240,8 +244,10 @@ export type Database = {
           description_vn?: string | null
           email?: string | null
           facebook_url?: string | null
+          favicon_url?: string | null
           id?: string
           instagram_url?: string | null
+          logo_url?: string | null
           phone?: string | null
           tiktok_url?: string | null
           updated_at?: string
