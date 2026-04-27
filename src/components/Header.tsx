@@ -5,11 +5,13 @@ import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { LanguageToggle } from '@/components/ui/language-toggle'
 import { Menu, X, Sunrise, Shield } from 'lucide-react'
+import { useBranding } from '@/hooks/use-branding'
 
 const Header = () => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const branding = useBranding()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,15 +49,27 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="p-2 rounded-full bg-gradient-to-br from-sakura to-sunrise shadow-glow">
-              <Sunrise className="h-8 w-8 text-white" />
-            </div>
+            {branding.logo_url ? (
+              <img
+                src={branding.logo_url}
+                alt="Logo"
+                className="h-12 w-12 rounded-full object-cover shadow-glow"
+              />
+            ) : (
+              <div className="p-2 rounded-full bg-gradient-to-br from-sakura to-sunrise shadow-glow">
+                <Sunrise className="h-8 w-8 text-white" />
+              </div>
+            )}
             <div>
               <h1 className="text-xl font-bold font-japanese">
-                Quang Dũng Japanese Center
+                {(i18n.language?.startsWith('ja')
+                  ? branding.center_name_jp
+                  : i18n.language?.startsWith('en')
+                  ? branding.center_name_en
+                  : branding.center_name_vn) || 'Quang Dũng Japanese Center'}
               </h1>
               <p className="text-xs text-muted-foreground font-japanese">
-                クアンユン日本語センター
+                {branding.center_name_jp || 'クアンユン日本語センター'}
               </p>
             </div>
           </div>
